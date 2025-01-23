@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ApartmentType } from 'types';
 
-const APARTMENTS_BASE_URL = 'http://localhost:5000/apartments'
+const APARTMENTS_BASE_URL = 'test-task-server-6mxa5vkug-snizhannas-projects.vercel.app'
 
 export const getApartments = createAsyncThunk(
     'apartments/getApartments',
