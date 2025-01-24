@@ -1,17 +1,17 @@
 {
 	"compilerOptions": {
-	  "outDir": "./server/dist",  // Compiled files go here
-	  "rootDir": "./server",  // Source files are in the `server` folder
+	  "outDir": "./dist",  // Output compiled files into `dist` folder
+	  "rootDir": ".",  // Root directory for TypeScript source files (current directory)
 	  "module": "CommonJS",
 	  "target": "ES6",
 	  "strict": true
 	},
 	"include": [
-	  "server/index.ts",  // Explicitly include `index.ts`
-	  "server/routes/**/*.ts"  // Include all `.ts` files under `routes/`
+	  "index.ts",  // Include index.ts
+	  "routes/**/*.ts"  // Include all `.ts` files in the `routes` folder
 	],
 	"exclude": [
-	  "server/dist"  // Exclude the output folder
+	  "dist"  // Exclude compiled files in the dist folder
 	]
   }
   
