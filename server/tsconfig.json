@@ -1,18 +1,18 @@
 {
 	"compilerOptions": {
-	  "outDir": "./dist",       // Output directory for compiled files
-	  "rootDir": ".",           // Root directory for source files
-	  "module": "CommonJS",     // Set module system to CommonJS (for `require`)
-	  "target": "ES6",          // Target ECMAScript version
-	  "strict": true,           // Enable strict type checking
-	  "skipLibCheck": true,     // Skip library checks for better performance
+	  "module": "CommonJS",   // This is important for Node.js compatibility
+	  "outDir": "./dist",     // Ensure TypeScript compiles to the dist folder
+	  "rootDir": ".",         // Root directory for the source files
+	  "target": "ES6",        // Target modern JavaScript for Node.js
+	  "strict": true,
+	  "skipLibCheck": true
 	},
 	"include": [
-	  "index.ts",               // Include index.ts for compilation
-	  "routes/**/*.ts"          // Include all .ts files in the routes folder
+	  "index.ts",             // Include index.ts for compilation
+	  "routes/**/*.ts"        // Include all `.ts` files in the routes folder
 	],
 	"exclude": [
-	  "dist"                    // Exclude dist folder from TypeScript compilation
+	  "dist"                  // Exclude compiled files in the dist folder
 	]
   }
   
