@@ -7,12 +7,6 @@ const ApartmentRouter = require('./routes/apartment');
 const app = express();
 const PORT = process.env.PORT || 3002;
 
-// Middleware
-app.use(cors({ origin: "http://localhost:3000" }));
-app.use(express.json());
-
-// Routes
-app.use("/apartments", ApartmentRouter);
 
 // Start the server
 const start = () => {
@@ -24,6 +18,13 @@ const start = () => {
 };
 
 start();
+
+// Middleware
+app.use(cors({ origin: "http://localhost:3000" }));
+app.use(express.json());
+
+// Routes
+app.use("/apartments", ApartmentRouter);
 
 // Export the app for Vercel
 module.exports = app;  // This is the correct export when using `require`
