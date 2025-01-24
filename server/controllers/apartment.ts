@@ -1,27 +1,36 @@
 const Apartment = require('../models/apartment');
 const asyncHandler = require('express-async-handler');
+import { Request, Response } from 'express';
 
-exports.getApartments = asyncHandler(async(req, res) => {
-    const {rooms, price} = req.query;
-    const filter = { };
 
-        if (rooms) {
-            filter['rooms'] = Number(rooms);
-        }
+interface ApartmentQuery {
+    rooms?: string;
+    price?: {
+      max?: string;
+      min?: string;
+    };
+  }
 
-        if (price) {
-            filter['price'] = {
-                $lte: Number(price.max),
-                $gte: Number(price.min)
-            }
-        };
+exports.getApartments = asyncHandler(async (req: Request<{}, {}, {}, ApartmentQuery>, res: Response) => {
+  const { rooms, price } = req.query;
+  const filter: any = {};
 
-        const apartments = await Apartment.find(filter);
-    
-    res.status(200).json(apartments);
+  if (rooms) {
+    filter["rooms"] = Number(rooms);
+  }
+
+  if (price?.max || price?.min) {
+    filter["price"] = {
+      ...(price.max && { $lte: Number(price.max) }),
+      ...(price.min && { $gte: Number(price.min) }),
+    };
+  }
+
+  const apartments = await Apartment.find(filter);
+  res.status(200).json(apartments);
 });
 
-exports.getApartment = asyncHandler(async(req, res) => {
+exports.getApartment = asyncHandler(async(req: Request, res: Response) => {
     const {apartmentId} = req.params;
 
     if (apartmentId) {
@@ -35,7 +44,7 @@ exports.getApartment = asyncHandler(async(req, res) => {
 });
 
 
-exports.createApartment = asyncHandler(async(req, res) => {
+exports.createApartment = asyncHandler(async(req: Request, res: Response) => {
     const {title, description, price, rooms} = req.body;
     try {
         const data = await Apartment.create({title, description, price, rooms, images: []});
@@ -44,7 +53,7 @@ exports.createApartment = asyncHandler(async(req, res) => {
     }
 });
 
-exports.editApartment = asyncHandler(async(req, res) => {
+exports.editApartment = asyncHandler(async(req: Request, res: Response) => {
     const {apartmentId} = req.params;
     const {title, description, price, rooms} = req.body;
 
@@ -61,7 +70,7 @@ exports.editApartment = asyncHandler(async(req, res) => {
 });
 
 
-exports.deleteApartment = asyncHandler(async(req, res) => {
+exports.deleteApartment = asyncHandler(async(req: Request, res: Response) => {
     const {apartmentId} = req.params;
     if (apartmentId) {
         await Apartment.findByIdAndDelete(apartmentId);
