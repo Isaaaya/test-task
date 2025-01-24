@@ -6,9 +6,12 @@ const connectToDb = require("./db/connectToDb");
 const ApartmentRouter = require("./routes/apartment");
 
 const PORT = process.env.PORT || 3002;
-const corsOptions = {
-  origin: "http://localhost:3000",
-};
+
+app.use(cors({ origin: "http://localhost:3000" }));
+app.use(express.json());
+
+
+app.use("/apartments", ApartmentRouter);
 
 const start = () => {
   connectToDb().then(() =>
@@ -20,9 +23,9 @@ const start = () => {
 
 start();
 
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use("/apartments", ApartmentRouter);
+// app.use(cors(corsOptions));
+// app.use(express.json());
+// app.use("/apartments", ApartmentRouter);
 
 
 module.exports = app;
