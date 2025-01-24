@@ -1,11 +1,11 @@
 {
 	"compilerOptions": {
-		"outDir": "./server/dist",
-		"rootDir": "./server",
-		"module": "CommonJS",
-		"skipLibCheck": true,
+	  "outDir": "./server/dist",
+	  "rootDir": "./",
+	  "module": "CommonJS",
+	  "target": "ES6",
+	  "strict": true
 	},
-	"include": ["index.ts", "routes/**/*.ts"]
+	"include": ["server/index.ts", "server/routes/**/*.ts"]
   }
   
- 
