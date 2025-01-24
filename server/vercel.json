@@ -11,5 +11,6 @@
       "src": "/(.*)",
       "dest": "server/dist/index.js"
     }
-  ]
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.ts" }]
 }
