@@ -1,11 +1,12 @@
 {
 	"compilerOptions": {
 	  "outDir": "./server/dist",
-	  "rootDir": "./",
+	  "rootDir": "./server",  // Set to `./server` since your source files are here
 	  "module": "CommonJS",
 	  "target": "ES6",
 	  "strict": true
 	},
-	"include": ["server/index.ts", "server/routes/**/*.ts"]
+	"include": ["server/index.ts", "server/routes/**/*.ts"],  // Adjusted include path
+	"exclude": ["server/dist"]
   }
   
