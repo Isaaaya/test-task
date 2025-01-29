@@ -8,7 +8,6 @@ const app = express();
 const PORT = process.env.PORT || 3002;
 
 
-// Start the server
 const start = () => {
   connectToDb().then(() => {
     app.listen(PORT, () => {
@@ -19,12 +18,10 @@ const start = () => {
 
 start();
 
-// Middleware
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "https://test-task-client-seven.vercel.app" }));
 app.use(express.json());
 
-// Routes
 app.use("/apartments", ApartmentRouter);
 
-// Export the app for Vercel
-module.exports = app;  // This is the correct export when using `require`
+
+module.exports = app;
