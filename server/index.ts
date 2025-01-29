@@ -18,7 +18,7 @@ const start = () => {
 
 start();
 
-app.use(cors({ origin: "https://test-task-client-seven.vercel.app" }));
+app.use(cors({ origin: ["https://test-task-client-seven.vercel.app", "http://localhost:3000"]}));
 app.use(express.json());
 
 app.use("/apartments", ApartmentRouter);
