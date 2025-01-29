@@ -24,6 +24,7 @@ const PriceFilter = () => {
       <div className='flex flex-col gap-3 md:items-center md:flex-row'>
           <div className='flex gap-3'>
             {inputFields.map((inputField) => <input
+                  key={inputField.name}
                   name={inputField.name}
                   type='number'
                   placeholder={`${inputField.name} Price`}

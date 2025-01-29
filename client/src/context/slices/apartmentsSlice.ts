@@ -10,6 +10,10 @@ interface ApartmentsSliceState {
   selectedApartment: ApartmentType | null;
   selectedApartmentLoading: boolean;
   selectedApartmentErrorMessage: string | null;
+
+  createApartmentLoading: boolean;
+  editApartmentLoading: boolean;
+  deleteApartmentLoading: boolean;
   
   createApartmentErrorMessage: string | null;
   editApartmentErrorMessage: string | null;
@@ -26,6 +30,10 @@ const initialState: ApartmentsSliceState = {
     selectedApartment: null,
     selectedApartmentLoading: false,
     selectedApartmentErrorMessage: null,
+
+    createApartmentLoading: false,
+    editApartmentLoading: false,
+    deleteApartmentLoading: false,
 
     createApartmentErrorMessage: null,
     editApartmentErrorMessage: null,
@@ -76,13 +84,21 @@ export const apartmentsSlice = createSlice({
       state.selectedApartmentErrorMessage = payload as string;
     })
 
+    .addCase(createApartment.pending, (state) => {
+      state.createApartmentLoading = true;
+    })
     .addCase(createApartment.fulfilled, (state, { payload }) => {
       state.apartments = [...state.apartments, payload];
+      state.createApartmentLoading = false;
     })
     .addCase(createApartment.rejected, (state, {payload}) => {
       state.createApartmentErrorMessage = payload as string;
+      state.createApartmentLoading = false;
     })
 
+    .addCase(editApartment.pending, (state) => {
+      state.editApartmentLoading = true;
+    })
     .addCase(editApartment.fulfilled, (state, { payload }) => {
         const editedApartment = payload;
         const apartmentIndex = state.apartments.findIndex((apartment) => apartment?._id === editedApartment._id);
@@ -90,16 +106,23 @@ export const apartmentsSlice = createSlice({
         if (apartmentIndex !== -1) {
           state.apartments[apartmentIndex] = editedApartment;
         }
+        state.editApartmentLoading = false;
     })
     .addCase(editApartment.rejected, (state, {payload}) => {
       state.editApartmentErrorMessage = payload as string;
+      state.editApartmentLoading = false;
     })
 
+    .addCase(deleteApartment.pending, (state) => {
+      state.deleteApartmentLoading = true;
+    })
     .addCase(deleteApartment.fulfilled, (state, {payload}) => {
       state.apartments = state.apartments.filter(apartment => apartment._id !== payload);
+      state.deleteApartmentLoading = false;
     })
     .addCase(deleteApartment.rejected, (state, {payload}) => {
       state.deleteApartmentErrorMessage = payload as string;
+      state.deleteApartmentLoading = false;
     });
   },
 });
